@@ -23,10 +23,10 @@ def calculateRSI(data, wind):
 # Technical Indicators
 def calculateTechnicalIndicators():
     # Simple Moving Average (SMA)
-    stockData["SMA50"] = stockData["Close"].rolling(window=MOVING_AVERAGE_WINDOW).mean()
+    stockData["SMA"] = stockData["Close"].rolling(window=MOVING_AVERAGE_WINDOW).mean()
 
     # Exponential Moving Average (EMA)
-    stockData["EMA20"] = stockData["Close"].ewm(span=MOVING_AVERAGE_WINDOW,adjust=False).mean()
+    stockData["EMA"] = stockData["Close"].ewm(span=MOVING_AVERAGE_WINDOW,adjust=False).mean()
 
     # Relative Strength Index (RSI)
     stockData["RSI14"] = calculateRSI(stockData["Close"], 14)
