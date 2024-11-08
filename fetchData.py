@@ -7,7 +7,7 @@ MOVING_AVERAGE_WINDOW = 20
 
 # Fetch data
 ticker = yf.Ticker(input("Ticker: "))
-stockData = ticker.history(period="2y")
+stockData = ticker.history(period="1y")
 
 # Calculate RSI (Relative Strength Index)
 def calculateRSI(data, wind):
