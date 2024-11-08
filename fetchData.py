@@ -30,8 +30,6 @@ def calculateTechnicalIndicators():
     # Relative Strength Index (RSI)
     stockData["RSI14"] = calculateRSI(stockData["Close"], 14)
 
-    stock_data = stock_data.dropna()
-
 
 
 
