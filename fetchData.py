@@ -8,6 +8,12 @@ MOVING_AVERAGE_WINDOW = 20
 ticker = yf.Ticker(input("Ticker: "))
 stockData = ticker.history(period="1y")
 
+# Get target prices
+targetPrices = ticker.analyst_price_targets
+meanTargetPrice = targetPrices.get("mean")
+highTargetPrice = targetPrices.get("high")
+lowTargetPrice = targetPrices.get("low")
+
 # Calculate RSI (Relative Strength Index)
 def calculateRSI(data, wind):
     delta = data.diff(1)
@@ -23,10 +29,8 @@ def calculateRSI(data, wind):
 def calculateTechnicalIndicators():
     # Simple Moving Average (SMA)
     stockData["SMA"] = stockData["Close"].rolling(window=MOVING_AVERAGE_WINDOW).mean()
-
     # Exponential Moving Average (EMA)
     stockData["EMA"] = stockData["Close"].ewm(span=MOVING_AVERAGE_WINDOW,adjust=False).mean()
-
     # Relative Strength Index (RSI)
     stockData["RSI14"] = calculateRSI(stockData["Close"], 14)
 

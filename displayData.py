@@ -5,10 +5,6 @@ import matplotlib.pyplot as plt
 # Calculate technical indicaotrs
 calculateTechnicalIndicators()
 
-stockData["Prediction"] = model.predict(stockData[features])
-stockData["Buy"] = np.where(stockData["Prediction"] == 1, stockData["Close"], np.nan)
-stockData["Sell"] = np.where(stockData["Prediction"] == 0, stockData["Close"], np.nan)
-
 # Create plot size
 plt.figure(figsize=(16, 7))
 
@@ -17,9 +13,13 @@ plt.plot(stockData["Close"], label="Close Price")
 plt.plot(stockData["SMA"], label="SMA")
 plt.plot(stockData["EMA"], label="EMA")
 
-# Plot Buy and Sell indicators
-plt.scatter(stockData.index, stockData["Buy"], marker="^", color="green", label="Buy Signal")
-plt.scatter(stockData.index, stockData["Sell"], marker="v", color="red", label="Sell Signal")
+stockData["Mean_Target"] = meanTargetPrice
+stockData["High_Target"] = highTargetPrice
+stockData["Low_Target"] = lowTargetPrice
+
+plt.plot(stockData.index, stockData["Mean_Target"], label="Mean Analyst Target", color="purple", linestyle="--")
+plt.plot(stockData.index, stockData["High_Target"], label="High Analyst Target", color="green", linestyle="--", linewidth="2")
+plt.plot(stockData.index, stockData["Low_Target"], label="Low Analyst Target", color="red", linestyle="--",linewidth="2")
 
 # Create data plot
 plt.title(f"{ticker} Stock Price with SMA and EMA")
